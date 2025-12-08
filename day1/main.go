@@ -125,7 +125,7 @@ func partTwo(filePath string) {
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Println("You must specify an input file")
+		log.Println("You must specify an input file")
 		return
 	}
 
