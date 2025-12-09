@@ -30,14 +30,14 @@ func partOne(filePath string) {
 	file, err := os.ReadFile(filePath)
 	check(err)
 
-	idRanges := strings.Split(string(file), ",")
+	rangeStrings := strings.Split(string(file), ",")
 
 	invalidIds := 0
 
-	for _, row := range idRanges {
+	for _, row := range rangeStrings {
 		idRange := strings.Split(row, "-")
 		if len(idRange) != 2 {
-			log.Println("Skipping invalid range: ", row)
+			log.Printf("Skipping invalid range '%s': expected two elements after splitting by '-', got %d", row, len(idRange))
 			continue
 		}
 
@@ -48,6 +48,7 @@ func partOne(filePath string) {
 
 		for i := start; i <= end; i++ {
 			id := strconv.Itoa(i)
+			// Only consider IDs with even length, as they can be split into two equal halves for comparison
 			if len(id)%2 == 0 {
 				middleIndex := len(id) / 2
 				leftSide := id[:middleIndex]
